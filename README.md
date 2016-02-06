@@ -1,5 +1,6 @@
 
 ![alt tag](https://raw.github.com/atlantageek/visionbot/master/visionbot.jpg)
+[[https://github.com/atlantageek/repository/visionbot/master/visionbot.jpg|alt=octocat]]
 
 This is the code for the maze solving robot using computer vision.  (put cute acronym here)
 
