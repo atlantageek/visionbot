@@ -1,5 +1,4 @@
 
-![alt tag](https://raw.githubusercontent.com/atlantageek/visionbot/master/visionbot.jpg)
 ![alt tag](https://raw.githubusercontent.com/atlantageek/visionbot/master/visionbot.jpg?token=AAmKP2wJubjOQRUC39a_Plko1jaVXauqks5Wv4ZGwA%3D%3D)
 [[https://github.com/atlantageek/visionbot/master/visionbot.jpg|alt=octocat]]
 
