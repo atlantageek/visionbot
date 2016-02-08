@@ -30,11 +30,11 @@ if (found):
    imagain = cv2.circle(imgagain, (corners[7][0][0],corners[7][0][1]), 10,(100,0,0), -1)
    imagain = cv2.circle(imgagain, (corners[48][0][0],corners[48][0][1]), 10,(100,0,0), -1)
    imagain = cv2.circle(imgagain, (corners[55][0][0],corners[55][0][1]), 10,(100,0,0), -1)
-   cv2.imshow('imgx',imgagain)
+   cv2.imwrite('workspace/imgx.jpg',imgagain)
 
    retvalHomography, mask = cv2.findHomography(q, dst, cv2.RANSAC)
    print(retvalHomography)
    result = cv2.warpPerspective(imgagain, retvalHomography, (400, 500))
-   cv2.imshow("img", result)
+   cv2.imwrite("workspace/img.jpg", result)
    cv2.waitKey(0)
 
