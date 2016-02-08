@@ -36,9 +36,9 @@ contours, hierarchy = cv2.findContours(im_bw,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMP
 cv2.imwrite("workspace/bw.jpg", imgray)
 
 largest = findLargest(contours)
-for pnt in list(largest):
-	print pnt
 cnt = contours[largest]
+for pnt in list(cnt):
+	print pnt
 epsilon = 0.020 * cv2.arcLength(cnt, True)
 approx = cv2.approxPolyDP(cnt, epsilon, True)
 cv2.drawContours(img, contours, largest,(255,0,0),3)
