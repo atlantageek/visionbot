@@ -8,7 +8,7 @@ import serial
 import struct
 import pyfirmata
 
-board = pyfirmata.Arduino('/dev/ttyUSB0')
+board = pyfirmata.Arduino('/dev/ttyACM0')
 iter8 = pyfirmata.util.Iterator(board)
 iter8.start()
 turret = board.get_pin('d:5:s')

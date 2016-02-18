@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/static/stylesheets/jquery-ui.css">
+
+  </head>
+  <body>
+    <h1>Hello, world!</h1>
+    <div class="row">
+      <div class="col-md-1">
+        Rotate: <span id="rotateval"></span>
+        <div id="rotate" style="width:15px; margin:50px;"></div>
+      </div>
+ 
+      <div class="col-md-4">
+      <img src="{{ url_for('video_feed') }}">
+      </div>
+      <div class="col-md-1">
+        Tilt: <span id="tiltval"></span>
+        <div id="tilt" style="width:15px; margin:50px;"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div id="steer" style="width:60px; margin:50px;"></div>
+      <div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <button id="left" class="btn btn-default">Left</button>
+      <div>
+      <div class="col-md-3">
+        <button id="go" class="btn btn-default">Straight</button>
+      <div>
+      <div class="col-md-3">
+        <button id="right" class="btn btn-default">Right</button>
+      <div>
+      <div class="col-md-3">
+        <button id="stop" class="btn btn-default">Stop</button>
+      <div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="/static/javascript/jquery-1.10.2.js"></script>
+  <script>
+  $(function() {
+    $("#left").click(function(e) {
+      e.preventDefault();
+      $.get("/turnleft")
+    });
+    $("#right").click(function(e) {
+      e.preventDefault();
+      $.get("/turnright")
+    });
+    $("#go").click(function(e) {
+      e.preventDefault();
+      $.get("/straight")
+    });
+    $("#stop").click(function(e) {
+      e.preventDefault();
+      $.get("/stop")
+    });
+    // setup master volume
+    $( "#rotate" ).slider({
+      value: 90,
+      min: 0,
+      max:180,
+      orientation: "vertical",
+      animate: true
+    }).on("slidestop", function(event,ui) {
+	console.log(ui.value);
+	$.get("/rotate/" + ui.value)
+	})
+    .on("slide", function(event,ui) {$("#rotateval").text(ui.value);});
+    // setup master volume
+    $( "#tilt" ).slider({
+      value: 90,
+      min: 0,
+      max:180,
+      orientation: "vertical",
+      animate: true
+    }).on("slidestop", function(event,ui) {
+	console.log(ui.value);
+	$.get("/tilt/" + ui.value)
+	})
+    .on("slide", function(event,ui) {$("#tiltval").text(ui.value);});
+    // setup master volume
+    $( "#steer" ).slider({
+      value: 0,
+      min: -90,
+      max:90,
+      orientation: "horizontal",
+      animate: true
+    }).on("slidestop", function(event,ui) {
+	console.log(ui.value);
+	$.get("/steer/" + ui.value)
+	})
+    .on("slide", function(event,ui) {$("#tiltval").text(ui.value);});
+  });
+  </script>
+  <script src="/static/javascript/jquery-ui.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/static/javascript/bootstrap.min.js"></script>
+  </body>
+</html>
