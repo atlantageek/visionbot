@@ -1,0 +1,61 @@
+<html>
+  <head>
+    <title>Video Streaming Demonstration</title>
+    <script src="/jquery-3.1.1.min.js" ></script>
+  </head>
+  <body>
+    <h1>Video Streaming Demonstration</h1>
+    <img src="{{ url_for('video_feed') }}"><br>
+    <button id="find_ball" type="button">Find Ball</button><br>
+    <button id="no_ball" type="button">Dont Find Ball</button><br>
+    <button id="get_center" type="button">get Center</button><br>
+  </body>
+  <script type="text/javascript">
+    var capture=[];
+    var dragging=false;
+    $(document).ready(function() {
+      $("#find_ball").click(function() {
+        $.ajax({ type: 'GET', url: '/find_ball', });
+        });
+      $("#no_ball").click(function() {
+        $.ajax({ type: 'GET', url: '/no_ball', });
+      });
+      $("#get_center").click(function() {
+        $.ajax({ type: 'GET', url: '/get_center', });
+      });
+      $('img').on('dragstart', function(event) { event.preventDefault(); });
+      $('img').mousedown(function(e) {
+        var offset = $(this).offset();
+        var x= e.pageX - offset.left;
+        var y=e.pageY - offset.top;
+        capture.push([x,y]);
+        dragging=true;
+        console.log("---");
+     });
+      $('img').mouseup(function(e) {
+        dragging=false;
+        var offset = $(this).offset();
+        var x= e.pageX - offset.left;
+        var y=e.pageY - offset.top;
+        capture.push([x,y]);
+        console.log(capture);
+        $.post('/capture', capture);
+     });
+      $('img').mousemove(function(e) {
+        if (dragging) {
+        var offset = $(this).offset();
+        var x= e.pageX - offset.left;
+        var y=e.pageY - offset.top;
+        capture.push([x,y]);
+        }
+     });
+      $('img').mousedown(function(e) {
+        var offset = $(this).offset();
+        var x= e.pageX - offset.left;
+        var y=e.pageY - offset.top;
+        capture.push([x,y]);
+        console.log("---");
+     });
+    });
+  </script>
+</html>
